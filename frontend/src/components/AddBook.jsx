@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { API_ENDPOINTS } from "../config/api";
 
 const AddBook = () => {
   const [book, setBook] = useState({ title: "", author: "", quantity: 1 });
@@ -7,12 +8,12 @@ const AddBook = () => {
   const [error, setError] = useState("");
 
   const token = localStorage.getItem("token");
-  const API_BASE_URL = "http://localhost:5000/api/admin";
+
 
   const handleAddBook = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${API_BASE_URL}/books`, book, {
+      const res = await axios.post(API_ENDPOINTS.ADD_BOOK, book, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMessage(res.data.message);

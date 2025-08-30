@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_ENDPOINTS } from "../config/api";
 
 const IssuedBooks = () => {
   const [issuedBooks, setIssuedBooks] = useState([]);
@@ -10,7 +11,7 @@ const IssuedBooks = () => {
     const fetchIssuedBooks = async () => {
       try {
         setLoading(true);
-        const res = await axios.get("http://localhost:5000/api/student/issued-books", {
+        const res = await axios.get(API_ENDPOINTS.GET_BORROWED_BOOKS, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setIssuedBooks(res.data);

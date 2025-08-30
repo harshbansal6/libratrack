@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API_ENDPOINTS } from "../config/api";
 
 const AllStudents = () => {
   const [students, setStudents] = useState([]);
@@ -18,7 +19,7 @@ const AllStudents = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/api/admin/students", {
+      const res = await axios.get(API_ENDPOINTS.GET_STUDENTS, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -48,7 +49,7 @@ const AllStudents = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/admin/students/${id}`, {
+      await axios.delete(API_ENDPOINTS.DELETE_STUDENT(id), {
         headers: { Authorization: `Bearer ${token}` },
       });
 

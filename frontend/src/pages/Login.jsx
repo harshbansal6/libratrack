@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {jwtDecode} from "jwt-decode"; // Install using: npm install jwt-decode
+import { API_ENDPOINTS } from "../config/api";
 
 const Login = ({ setUser }) => {
   const [email, setEmail] = useState("");
@@ -16,7 +17,7 @@ const Login = ({ setUser }) => {
       let res;
       
       // Try logging in as admin
-      res = await fetch("http://localhost:5000/api/admin/login", {
+      res = await fetch(API_ENDPOINTS.ADMIN_LOGIN, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -24,7 +25,7 @@ const Login = ({ setUser }) => {
   
       if (!res.ok) {
         // If admin login fails, try student login
-        res = await fetch("http://localhost:5000/api/student/login", {
+        res = await fetch(API_ENDPOINTS.STUDENT_LOGIN, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password }),

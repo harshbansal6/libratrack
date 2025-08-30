@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { API_ENDPOINTS } from "../config/api";
 
 const IssueBook = () => {
   const [departments] = useState(["EE", "ECE", "CSE", "CE", "ME", "MCA", "MBA"]);
@@ -12,13 +13,13 @@ const IssueBook = () => {
   const [loading, setLoading] = useState(false);
 
   const token = localStorage.getItem("token");
-  const API_BASE_URL = "http://localhost:5000/api/admin";
+
 
   useEffect(() => {
     const fetchBooks = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("http://localhost:5000/api/books");
+        const response = await axios.get(API_ENDPOINTS.GET_BOOKS);
         console.log("Books fetched:", response.data); // Debugging
         setBooks(response.data);
       } catch (error) {

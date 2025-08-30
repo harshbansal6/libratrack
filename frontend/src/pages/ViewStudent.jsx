@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_ENDPOINTS } from "../config/api";
 
 const ViewStudent = () => {
   const { id } = useParams();
@@ -11,7 +12,7 @@ const ViewStudent = () => {
     const fetchStudent = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get(`http://localhost:5000/api/admin/students/${id}`, {
+        const res = await axios.get(API_ENDPOINTS.GET_STUDENT(id), {
           headers: { Authorization: `Bearer ${token}` },
         });
         console.log("Student Data:", res.data); // Log the data for debugging
